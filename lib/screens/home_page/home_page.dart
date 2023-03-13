@@ -202,20 +202,7 @@ class HomePageState extends State<HomePage> {
     pageLoading = true;
     today = getToday(jNow);
     taskManagementList.clear();
-    var response = await (Services()).getTaskManagementList(today);
-    if(response[0]["res"] == 1){
-      setState(() {
-        response.forEach((element){
-          taskManagementList.add(TaskManagementModel.fromJson(element));
-        });
 
-        recordedTasks = taskManagementList.length.toString();
-
-        listHeight = 180.0 * taskManagementList.length;
-        recordedTasks = taskManagementList.length.toString();
-      });
-
-      getPersonelProfile();
       getCurrentShift();
      // gps();
       //getBluethooseInfo();
@@ -275,8 +262,8 @@ class HomePageState extends State<HomePage> {
   }
 
   getCurrentShift() async {
-   setState(() => pageLoading = true);
-    var response = await (Services()).getCurrentShift();
+
+    var response
     if(response[0]["res"] == 1){
    setState(() {
         response[0]['company_list'].forEach((element){
@@ -351,26 +338,6 @@ class HomePageState extends State<HomePage> {
     }
   }
 
-  // گرفتن اطلاعات پرسنل
-  getPersonelProfile() async {
-    var response = await (Services()).getOtherPersonelItems(UserModel.mainToken);
-
-    if(response[0]["res"] == 1){
-      UserModel.name = response[0]["name"];
-      UserModel.family = response[0]["family"];
-      UserModel.picPath = response[0]["pic_path"];
-      UserModel.nationalCode = response[0]["national_code"];
-      UserModel.mobile = response[0]["mobile"];
-      UserModel.email = response[0]["email"];
-      UserModel.userRoleId = response[0]["user_role_id"];
-      UserModel.username = response[0]["username"];
-
-      setState((){
-        nameOfUser = UserModel.name;
-      });
-    }
-
-  }
 
   getwifiInfo()async
   {
@@ -748,24 +715,14 @@ if(endOfJob.split(":").length==2)
     child: Image.asset("assets/images/location2.png", fit: BoxFit.fill),
     ),
     const SizedBox(width: 6),
-    SizedBox(
-    width: MediaQuery.of(context).size.width - 120,
-    child: Text("آدرس : سعادت آباد - بلوار مدیریت - خیابان علامه طباطبایی - کوچه حق طلب غربی پلاک ۱۰ - ساختمان فارابی",
-    style: Theme.of(context).textTheme.bodyText1!.copyWith(
-    fontSize: 13.sp,
-    ),
-    maxLines: 1,
-    softWrap: true,
-    overflow: TextOverflow.ellipsis,
-    ),
-    )
+
     ],
     )
     ):Container(),
     const SizedBox(height: 16),
 
     // طراحی ویجت سمت کارمندان
-    !beforEnter? positionBoxWidget(context):Container(),
+    !beforEnter? null:Container(),
 
     // عنوان تاریخ امروز
     Padding(
@@ -799,25 +756,7 @@ if(endOfJob.split(":").length==2)
     ),
 
     // وظایف ثبت شده
-    SizedBox(
-    height: listHeight,
-    child: SingleChildScrollView(
-    child: ListView.builder(
-    scrollDirection: Axis.vertical,
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    itemCount: taskManagementList.length,
-    itemBuilder: (context, index){
-    return GestureDetector(
-    onTap: (){
-    getDetailOfActivity(taskManagementList[index].id!);
-    },
-    child: hpRecordedTasks(context, index, taskManagementList)
-    );
-    },
-    ),
-    ),
-    ),
+
     ],
     ),
     )

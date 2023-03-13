@@ -80,20 +80,9 @@ class MyApp extends StatelessWidget {
                        LatLng(31.3384553,48.6731974)//(34.654575, 50.895482),
               ]
               ),
-              "/reset_password" : (context) => const ResetPassword(),
-              "/confirm_login" : (context) => const ConfirmLogin(),
+
               "/home_page" : (context) => const HomePage(),
-              "/setting_user_account" : (context) => const UserAccount(),
-              "/change_password" : (context) => const ChangePassword(),
-              "/setting_notification" : (context) => const Notifications(),
-              "/setting_support" : (context) => const Support(),
-              "/setting_support_request" : (context) => const SupportRequest(),
-              "/kartabl_task_management" : (context) => const TaskManagement(),
-              "/kartabl_morkhasi" : (context) => const Morkhasi(),
-              "/kartabl_mission" : (context) => const Mission(),
-              "/kartabl_taradod" : (context) => const Taradod(),
-              "/mali_request_for_payment" : (context) => const RequestForPayment(),
-              "/mali_v_b_report" : (context) => const VarizBardashtReport(),
+
               // "/todo_screen" : (context) => directionality(TodoScreen()),
             },
           ),
